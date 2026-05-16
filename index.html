@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f2e8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="FP3コーチ" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>FP3級 最短合格コーチ</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">日本FP協会・資産設計提案業務</p>
+          <h1>FP3級 最短合格コーチ</h1>
+        </div>
+        <div class="target-badge">
+          <span>目標</span>
+          <strong>7割安定</strong>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero-panel">
+          <div>
+            <p class="status-label">知識ゼロ前提</p>
+            <h2>過去問から始めて、間違いだけを潰す。</h2>
+            <p>
+              1日60分、週5日の学習を「今日の演習」「誤答ノート」「復習予定」に分解します。
+              テキスト通読は最小限にして、合格点を超える行動だけを残します。
+            </p>
+          </div>
+          <div class="score-ring" aria-label="学習進捗">
+            <span id="progressPercent">0%</span>
+            <small>完了率</small>
+          </div>
+        </section>
+
+        <nav class="tabs" aria-label="主要メニュー">
+          <button class="tab active" data-tab="today">今日</button>
+          <button class="tab" data-tab="basics">基礎</button>
+          <button class="tab" data-tab="plan">計画</button>
+          <button class="tab" data-tab="quiz">ミニテスト</button>
+          <button class="tab" data-tab="mistakes">誤答</button>
+          <button class="tab" data-tab="cards">暗記</button>
+        </nav>
+
+        <section id="today" class="view active">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Daily 60 minutes</p>
+              <h2>今日のメニュー</h2>
+            </div>
+            <button id="completeDayBtn" class="primary-btn">完了</button>
+          </div>
+
+          <div class="metric-grid">
+            <article>
+              <span>勉強時間</span>
+              <strong>60分</strong>
+            </article>
+            <article>
+              <span>問題数</span>
+              <strong id="todayQuestions">30問</strong>
+            </article>
+            <article>
+              <span>合格貢献度</span>
+              <strong id="contribution">高</strong>
+            </article>
+          </div>
+
+          <div class="timeline" id="todayTimeline"></div>
+
+          <form id="studyLogForm" class="tool-panel">
+            <h3>終わったら報告する内容</h3>
+            <label>
+              今日の正答数
+              <input id="correctCount" type="number" min="0" max="60" inputmode="numeric" placeholder="例：18" />
+            </label>
+            <label>
+              解いた問題数
+              <input id="totalCount" type="number" min="1" max="60" inputmode="numeric" value="30" />
+            </label>
+            <label>
+              一番わからなかったテーマ
+              <input id="weakTheme" type="text" placeholder="例：公的年金、所得控除、相続税" />
+            </label>
+            <button class="secondary-btn" type="submit">記録する</button>
+          </form>
+
+          <div class="next-box">
+            <h3>学習後に見る3つ</h3>
+            <ul id="afterStudyList"></ul>
+          </div>
+        </section>
+
+        <section id="basics" class="view">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Zero-base input</p>
+              <h2>基礎知識ロードマップ</h2>
+            </div>
+            <select id="basicFieldSelect" class="compact-select" aria-label="分野を選択"></select>
+          </div>
+
+          <div class="basic-layout">
+            <aside class="basic-menu" id="basicMenu" aria-label="基礎分野"></aside>
+            <article class="basic-lesson" id="basicLesson"></article>
+          </div>
+        </section>
+
+        <section id="plan" class="view">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">8-week route</p>
+              <h2>最短合格プラン</h2>
+            </div>
+            <button id="resetBtn" class="ghost-btn">初期化</button>
+          </div>
+
+          <div class="plan-summary">
+            <div>
+              <span>仮目標</span>
+              <strong>8週間</strong>
+            </div>
+            <div>
+              <span>総学習</span>
+              <strong>40時間</strong>
+            </div>
+            <div>
+              <span>配分</span>
+              <strong>学科6：実技4</strong>
+            </div>
+          </div>
+
+          <div class="week-list" id="weekList"></div>
+
+          <div class="focus-grid">
+            <article>
+              <h3>絶対に落とさない</h3>
+              <ul id="mustList"></ul>
+            </article>
+            <article>
+              <h3>捨てる学習</h3>
+              <ul id="skipList"></ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="quiz" class="view">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">10 questions</p>
+              <h2>ミニテスト</h2>
+            </div>
+            <button id="newQuizBtn" class="primary-btn">出題</button>
+          </div>
+          <div id="quizList" class="quiz-list"></div>
+          <button id="gradeQuizBtn" class="secondary-btn wide">採点する</button>
+          <div id="quizResult" class="result-box" hidden></div>
+        </section>
+
+        <section id="mistakes" class="view">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Wrong answer log</p>
+              <h2>誤答ノート</h2>
+            </div>
+          </div>
+
+          <form id="mistakeForm" class="tool-panel">
+            <div class="form-row">
+              <label>
+                分野
+                <select id="mistakeField"></select>
+              </label>
+              <label>
+                問題テーマ
+                <input id="mistakeTheme" type="text" placeholder="例：遺留分、債券利回り" />
+              </label>
+            </div>
+            <div class="form-row">
+              <label>
+                私の誤答
+                <input id="wrongAnswer" type="text" />
+              </label>
+              <label>
+                正解
+                <input id="rightAnswer" type="text" />
+              </label>
+            </div>
+            <label>
+              間違えた原因
+              <select id="mistakeReason">
+                <option>知識不足</option>
+                <option>読み違い</option>
+                <option>計算ミス</option>
+                <option>暗記が曖昧</option>
+              </select>
+            </label>
+            <label>
+              次に解く時の注意点
+              <textarea id="nextCaution" rows="3" placeholder="例：数字と対象者を先に見る"></textarea>
+            </label>
+            <button class="secondary-btn" type="submit">誤答を追加</button>
+          </form>
+
+          <div class="mistake-list" id="mistakeList"></div>
+        </section>
+
+        <section id="cards" class="view">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Memory cards</p>
+              <h2>暗記カード</h2>
+            </div>
+            <button id="shuffleCardBtn" class="primary-btn">1枚見る</button>
+          </div>
+          <div id="activeCard" class="flash-card"></div>
+          <div id="cardList" class="card-list"></div>
+        </section>
+      </main>
+
+      <footer>
+        法改正が関係する年金・税金・NISA・相続・不動産税制は、学習前に日本FP協会などの公式情報で確認してください。
+      </footer>
+    </div>
+
+    <script src="./app.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./service-worker.js");
+        });
+      }
+    </script>
+  </body>
+</html>

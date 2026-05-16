@@ -1,0 +1,25 @@
+{
+  "name": "FP3級 最短合格コーチ",
+  "short_name": "FP3コーチ",
+  "description": "FP3級を1日60分で学ぶための基礎講義、ミニテスト、誤答ノート、暗記カード。",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f2e8",
+  "theme_color": "#1f6f50",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./icons/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
