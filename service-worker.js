@@ -1,4 +1,4 @@
-const CACHE_NAME = "fp3-coach-v2";
+const CACHE_NAME = "fp3-coach-v3";
 const APP_SHELL = [
   "./",
   "./index.html",

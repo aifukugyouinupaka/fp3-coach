@@ -399,6 +399,13 @@ textarea {
   color: var(--muted);
 }
 
+.lesson-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
 .lesson-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -411,10 +418,31 @@ textarea {
   background: #fbf5eb;
 }
 
+.lesson-box-strong {
+  grid-column: span 2;
+}
+
+.lesson-wide {
+  margin: 12px 0;
+  padding: 16px;
+  border-radius: 8px;
+  background: #f4efe5;
+}
+
 .lesson-box ul,
-.lesson-box ol {
+.lesson-box ol,
+.lesson-wide ul {
   margin: 0;
   padding-left: 20px;
+}
+
+.lesson-box li,
+.lesson-wide li {
+  margin: 6px 0;
+}
+
+.lesson-wide p {
+  margin: 0;
 }
 
 .mini-check {
@@ -442,6 +470,10 @@ textarea {
 .mini-check-result {
   margin-top: 10px;
   font-weight: 800;
+}
+
+.mini-check-result p {
+  margin: 8px 0;
 }
 
 .week-item {
@@ -616,6 +648,10 @@ footer {
   .basic-layout,
   .lesson-grid {
     grid-template-columns: 1fr;
+  }
+
+  .lesson-box-strong {
+    grid-column: auto;
   }
 
   .week-item {
